@@ -2,7 +2,7 @@ clear all;
 clc;
 close all;
 
-pdfFile = 'combine_figures_2_to_1.pdf';
+pdfFile = 'Journal_2022_video_front.pdf';
 pwd = './';
 
 import org.apache.pdfbox.*
@@ -15,7 +15,8 @@ count = document.getNumberOfPages();
 images = [];
 for ii = 1:count
     bim = pdfRenderer.renderImageWithDPI(ii-1, 1000, rendering.ImageType.RGB);
-    images = [images (filename(1:end-4) + ".jpg")];
-    tools.imageio.ImageIOUtil.writeImage(bim, filename(1:end-4) + ".jpg", 1000);
+    images = [images (filename(1:end-4)+ ".jpg")];
+    
+    tools.imageio.ImageIOUtil.writeImage(bim, [filename(1:end-4) num2str(ii)] + ".jpg", 1000);
 end
 document.close()
